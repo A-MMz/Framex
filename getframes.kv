@@ -1,0 +1,114 @@
+<SelectFileScreen>:
+    MDFillRoundFlatButton:
+        text: 'Select file'
+        md_bg_color: 1, 0, 1, 1
+        on_press: root.get_image_one()
+        pos_hint: {'center_x':0.5, 'center_y':0.5}    
+<ExtractDir>:
+    MDFloatLayout:
+        size: (500,200)
+        MDIconButton:
+            icon: "arrow-left-bold"
+            pos_hint: {'x':0, 'y':.79}
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'file'
+        MDFillRoundFlatButton:
+            text: 'Select extract dir'
+            md_bg_color: 1, 0, 1, 1
+            on_press: root.get_exdir()
+            pos_hint: {'center_x':0.5, 'center_y':0.5}    
+
+
+<GetFramesScreen>:
+    MDFloatLayout:
+        size: (500,200)
+        
+        MDIconButton:
+            icon: "arrow-left-bold"
+            pos_hint: {'x':0, 'y':.79}
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'exdir'
+        Marquee:
+            text: app.app_filepath
+            font_name: 'DejaVuSans'
+            duration: 15
+            padding: 0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: None, None
+            size: 400, 30
+        BoxLayout:
+            orientation: 'vertical'
+            padding: [25, 40, 0, 0]
+            
+            MDStackLayout:
+                adaptive_height: True
+                orientation: 'rl-tb'
+                MDRaisedButton:
+                    text: 'Get frames'
+                
+                    md_bg_color: 1, 0, 1, 1
+                    on_press: root.get_frames()
+<Extracting>:
+    MDFloatLayout:
+        size: (500,200)
+        MDLabel:
+            text: 'Extracting: '+app.file_name
+            halign: 'center'
+            pos: (0,60) 
+        BoxLayout:
+            orientation: 'horizontal'
+            pos: (0, 10)  
+            MDLabel:
+                text: 'FPS: '+app.fps
+                halign: 'center'
+            MDLabel:
+                text: 'Video duration: '+app.video_duration
+                halign: 'center'
+            MDLabel:
+                text: 'in frame: '+app.pb
+                halign: 'center'
+        MDProgressBar:
+            value: app.pb2
+            max: 1
+            pos: (0, -40)
+<Completed>:
+    MDFloatLayout:
+        size: (500,200)
+        MDLabel:
+            text: 'Completed frame extraction!'
+            halign: 'center'
+            pos: (0,70)
+        MDLabel:
+            text: app.extracted_total+' frames extracted.'
+            halign: 'center'
+            pos: (0,40)
+        BoxLayout:
+            orientation: 'horizontal'
+            pos: (0,15)
+            MDLabel:
+                text: 'in '+app.time_taken
+                halign: 'center'
+            MDLabel:
+                text: 'Saved at:'
+                halign: 'center'
+        Marquee:
+            text: app.saved_path
+            font_name: 'DejaVuSans'
+            duration: 15
+            padding: 0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: None, None
+            size: 400, 30
+        MDFillRoundFlatButton:
+            text: 'Select new file'
+            halign: 'center'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            md_bg_color: 1, 0, 1, 1
+            on_press: 
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'file'
+  
+        
+    
