@@ -1,4 +1,4 @@
 # Framex
 Python video frame extractor with kivymd gui
 
-![framex fuctionality}(./framex.gif)
+![framex fuctionality](./framex.gif)
